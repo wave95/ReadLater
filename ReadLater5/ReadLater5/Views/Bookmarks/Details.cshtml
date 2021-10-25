@@ -1,0 +1,58 @@
+﻿@model Models.BookmarkModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+
+<h2>Details</h2>
+
+<div>
+    <h4>Bookmark</h4>
+    @Html.AntiForgeryToken()
+    <hr />
+    <dl class="dl-horizontal linkGroup">
+        @Html.HiddenFor(x => x.ID, new { @class = "hiddenID" })
+        <dt>
+            @Html.DisplayFor(model => model.ShortDescription)
+        </dt>
+
+        <dd>
+            <a href="@Model.URL" class="control-label col-md-2 bookmarkLink">@Model.URL</a>
+        </dd>
+
+        <dd>
+            <a href="@Model.ShareUrl" class="control-label col-md-2">@Model.ShareUrl</a>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<script>
+
+    $('.bookmarkLink').click(function () {
+        saveClick(this);
+    });
+
+    function saveClick(linkElement) {
+
+        var parentElement = $(linkElement).parents(".linkGroup");
+        var clickedId = parentElement.find('.hiddenID').val();
+
+        $.ajax({
+                url: '@Url.Action("SaveClick", "Bookmarks")',
+                type: "POST",
+                data: { bookmarkId: clickedId },
+                async: false,
+                success: function (data) {},
+                error: function (er) { }
+            });
+    };
+
+
+</script>

@@ -1,0 +1,35 @@
+﻿@model Models.DashboardModel
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h4>Trending Application</h4>
+
+@foreach (var item in Model.TrendingCategories)
+{
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.Display(item, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+}
+
+<h4>Favorite Links</h4>
+
+@foreach (var item in Model.FavoriteLinks)
+{
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-10">
+            @Html.Display(item.Url, new  { })
+            <div class="col-md-2">
+                @Html.Display(item.ClicksCount.ToString(), new { })
+            </div>
+        </div>
+    </div>
+</div>
+        
+}
+
+

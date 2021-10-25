@@ -1,0 +1,39 @@
+﻿@model Models.CategoryModel
+
+@{
+    Layout = "";
+}
+
+<div class="modal hide" data-backdrop="static" tabindex="-1" id="addCategory">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addCategoryLabel">Add Category</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>x</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form action="Create" method="post" asp-antiforgery="true">
+                    <div class="form-group"></div>
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger" id="categoryName"></span>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" data-save="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#addCategory').on('shown', function () {
+        $(document).off('focusin.modal');
+
+    });
+</script>
